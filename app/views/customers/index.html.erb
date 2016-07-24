@@ -6,7 +6,7 @@
   <%= form_for :customers, method: :get do |f| %>
     <div class="input-group input-group-lg">
       <%= label_tag :keywords, nil, class: "sr-only" %>
-      <%= text_field_tag :keywords, nil,
+      <%= text_field_tag :keywords, params[:keywords],
         placeholder: "First Name, Last Name, or Email Address",
         class: "form-control input-lg" %>
       <span class="input-group-btn">
@@ -21,24 +21,24 @@
   <header>
     <h1 class="h3">Results</h1>
   </header>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Joined</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @customers.each do |customer| %>
-        <tr>
-          <td><%= customer.first_name %></td>
-          <td><%= customer.last_name %></td>
-          <td><%= customer.email %></td>
-          <td><%= customer.created_at.to_date %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%#= render partial: "pager", locals: { keywords: @keywords, page: @page } %>
+  <%= render "pager", keywords: @keywords, page: @page, length: @length %>
+
+  <ol class="list-group">
+    <% @customers.each do |customer| %>
+      <li class="list-group-item clearfix">
+        <h3 class="pull-right">
+          <small class="text-uppercase">Joined</small>
+          <%= customer.created_at.to_date %>
+        </h3>
+        <h2 class="h3">
+          <%= customer.full_name %>
+          <small><%= customer.username %></small>
+        </h2>
+        <h4><%= customer.email %></h4>
+      </li>
+    <% end %>
+  </ol>
+
+  <%#= render "pager", locals: { keywords: @keywords, page: @page } %>
 </section>

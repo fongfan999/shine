@@ -1,5 +1,9 @@
 class CustomersController < ApplicationController
+  PAGE_SIZE = 10
+
   def index
+    @page = (params[:page] || 0).to_i
+
     if params[:keywords].present?
       @keywords = params[:keywords]
       customer_search_term = CustomerSearchTerm.new(@keywords)
@@ -8,8 +12,12 @@ class CustomersController < ApplicationController
           customer_search_term.where_clause,
           customer_search_term.where_args).
         order(customer_search_term.order)
+
+      @length = @customers.length / PAGE_SIZE
     else
-      @customers = Customer.all.limit(10)
+      @customers = []
     end
+
+    @customers.offset(PAGE_SIZE * @page).limit(PAGE_SIZE)
   end
 end
