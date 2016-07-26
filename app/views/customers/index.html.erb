@@ -2,27 +2,34 @@
   <h1 class="h2">Customer Search</h1>
 </header>
 
+<article ng-app="customers" ng-controller="CustomerSearchControl">
+
 <section class="search-form">
-  <%= form_for :customers, method: :get do |f| %>
+  <form>
     <div class="input-group input-group-lg">
-      <%= label_tag :keywords, nil, class: "sr-only" %>
-      <%= text_field_tag :keywords, params[:keywords],
-        placeholder: "First Name, Last Name, or Email Address",
-        class: "form-control input-lg" %>
+      <label for="keywords" class="sr-only">Keywords</label>
+      <input name="keywords" class="form-control input-lg"
+        placeholder="First Name, Last Name, or Email Address",
+        ng-model="keywords" value="<%= params[:keywords] %>">
       <span class="input-group-btn">
-        <%= submit_tag "Find Customers", name: nil, 
-          class: "btn btn-primary btn-lg" %>
+        <button class="btn btn-primary btn-lg"
+          ng-click="search(keywords)">
+          Find Customers
+        </button>
       </span>
     </div>
-  <% end %>
+  </form>
+
+  <h1 class="searchedFor" ng-if="searchedFor">
+    <small>Searched for:</small> {{searchedFor}}
+  </h1>
 </section>
 
 <section class="search-results">
   <header>
     <h1 class="h3">Results</h1>
   </header>
-  <%#= render partial: "pager", locals: { keywords: @keywords, page: @page } %>
-  <%= render "pager", keywords: @keywords, page: @page, length: @length %>
+  <%= render "pager", keywords: @keywords, page: @page %>
 
   <ol class="list-group">
     <% @customers.each do |customer| %>
@@ -39,6 +46,9 @@
       </li>
     <% end %>
   </ol>
-
-  <%#= render "pager", locals: { keywords: @keywords, page: @page } %>
+  
+  <%= render "pager", keywords: @keywords, page: @page %>
 </section>
+
+</article>
+

@@ -9,7 +9,7 @@
       <% end %>
     </li>
 
-    <li class="next <%= page == length ? 'disabled' : '' %>">
+    <li class="next">
       <%= link_to "Next &rarr;".html_safe,
         customers_path(keywords: keywords, page: page + 1) %>
     </li>
