@@ -1,17 +1,11 @@
 <nav>
   <ul class="pager">
-    <li class="previous <%= page == 0 ? 'disabled' : '' %>">
-      <% if page > 0 %>
-        <%= link_to "&larr; Previous".html_safe,
-          customers_path(keywords: keywords, page: page - 1) %>
-      <% else %>
-        <a href="">Previous</a>
-      <% end %>
+    <li class="previous">
+      <a href="" ng-click="previousPage()">&larr; Previous</a>
     </li>
 
     <li class="next">
-      <%= link_to "Next &rarr;".html_safe,
-        customers_path(keywords: keywords, page: page + 1) %>
+      <a href="" ng-click="nextPage()">Next &rarr;</a>
     </li>
   </ul>
 </nav>
