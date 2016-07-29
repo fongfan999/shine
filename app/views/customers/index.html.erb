@@ -6,18 +6,11 @@
 
 <section class="search-form">
   <form>
-    <div class="input-group input-group-lg">
       <label for="keywords" class="sr-only">Keywords</label>
       <input name="keywords" class="form-control input-lg"
         placeholder="First Name, Last Name, or Email Address",
-        ng-model="keywords" value="<%= params[:keywords] %>">
-      <span class="input-group-btn">
-        <button class="btn btn-primary btn-lg"
-          ng-click="search(keywords)">
-          Find Customers
-        </button>
-      </span>
-    </div>
+        ng-model="keywords" value="<%= params[:keywords] %>"
+        ng-change="search(keywords)">
   </form>
 
   <h1 class="searchedFor" ng-if="searchedFor">
