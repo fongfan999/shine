@@ -42,6 +42,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5', '>= 3.5.1'
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'teaspoon-jasmine' 
 end
 
 group :development do

@@ -1,6 +1,6 @@
 var app = angular.module("customers", [])
 
-var CustomerSearchControl = function($scope, $http) {
+var CustomerSearchController = function($scope, $http) {
   var page = 0;
   $scope.search = function(searchTerm) {
     if (searchTerm.length < 3) {
@@ -33,5 +33,5 @@ var CustomerSearchControl = function($scope, $http) {
   };
 }
 
-app.controller("CustomerSearchControl",
-  ["$scope", "$http", CustomerSearchControl]);
+app.controller("CustomerSearchController",
+  ["$scope", "$http", CustomerSearchController]);
