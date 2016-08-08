@@ -1,6 +1,16 @@
-var app = angular.module("customers", [])
+var app = angular.module("customers", ["ngRoute", "templates"])
 
-var CustomerSearchController = function($scope, $http) {
+app.config(["$routeProvider", function($routeProvider) {
+  $routeProvider.when("/", {
+    controller: "CustomerSearchController",
+    templateUrl: "customer_search.html"
+  }).when("/:id", {
+    controller: "CustomerDetailController",
+    templateUrl: "customer_detail.html"
+  });
+}]);
+
+var CustomerSearchController = function($scope, $http, $location) {
   var page = 0;
   $scope.search = function(searchTerm) {
     if (searchTerm.length < 3) {
@@ -31,7 +41,27 @@ var CustomerSearchController = function($scope, $http) {
     page = page + 1;
     $scope.search($scope.keywords);
   };
-}
+
+  $scope.viewDetails = function(customer) {
+    $location.path("/" + customer.id);
+  };
+};
+
+var CustomerDetailController = function($scope, $http, $routeParams) {
+  var customerId = $routeParams.id;
+  $scope.customer = {};
+
+  $http.get(
+    "/customers/" + customerId + ".json"
+  ).then(function(response) {
+    $scope.customer = response.data;
+  }, function(response) {
+    alert("There was a problem: " + response.status);
+  });
+};
 
 app.controller("CustomerSearchController",
-  ["$scope", "$http", CustomerSearchController]);
+  ["$scope", "$http", "$location", CustomerSearchController]);
+
+app.controller("CustomerDetailController",
+  ["$scope", "$http", "$routeParams", CustomerDetailController]);

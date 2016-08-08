@@ -1,0 +1,63 @@
+<header>
+  <h1 class="h2">Customer Search</h1>
+</header>
+
+<section class="search-form">
+  <form>
+      <label for="keywords" class="sr-only">Keywords</label>
+      <input name="keywords" class="form-control input-lg"
+        placeholder="First Name, Last Name, or Email Address",
+        ng-model="keywords" ng-change="search(keywords)">
+  </form>
+
+  <h1 class="searchedFor" ng-if="searchedFor">
+    <small>Searched for:</small> {{searchedFor}}
+  </h1>
+</section>
+
+<section class="search-results" ng-if="customers.length > 0">
+  <header>
+    <h1 class="h3">Results</h1>
+  </header>
+  <nav>
+    <ul class="pager">
+      <li class="previous">
+        <a href="" ng-click="previousPage()">&larr; Previous</a>
+      </li>
+
+      <li class="next">
+        <a href="" ng-click="nextPage()">Next &rarr;</a>
+      </li>
+    </ul>
+  </nav>
+
+  <ol class="list-group">
+      <li class="list-group-item clearfix" ng-repeat="customer in customers">
+        <h3 class="pull-right">
+          <small class="text-uppercase">Joined</small>
+          {{customer.created_at | date}}
+        </h3>
+        <h2 class="h3">
+          {{customer.first_name}} {{customer.last_name}}
+          <small>{{customer.username}}</small>
+        </h2>
+        <div class="pull-right">
+          <button class="btn btn-xs btn-primary"
+            ng-click="viewDetails(customer)">View Details...</button>
+        </div>
+        <h4>{{customer.email}}</h4>
+      </li>
+  </ol>
+  
+  <nav>
+    <ul class="pager">
+      <li class="previous">
+        <a href="" ng-click="previousPage()">&larr; Previous</a>
+      </li>
+
+      <li class="next">
+        <a href="" ng-click="nextPage()">Next &rarr;</a>
+      </li>
+    </ul>
+  </nav>
+</section>
