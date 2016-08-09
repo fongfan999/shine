@@ -1,10 +1,140 @@
 <article class="customer-details">
   <h1>Customer {{customer.id}}</h1>
-  <h2>{{customer.first_name}}  {{customer.last_name}}</h2>
-  <h3>{{customer.email}}</h3>
-  <h4>{{customer.username}}</h4>
-  <h5>
-    <small class="text-uppercase">Joined</small> 
-    {{customer.created_at | date}}
-  </h5>
 </article>
+
+<form>
+<div class="row">
+  <div class="col-md-6">
+    <article class="panel panel-primary">
+      <header class="panel-heading">
+        <h1 >Customer</h1>
+      </header>
+      <section class="panel-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="first-name" class="sr-only">First name</label>
+              <input class="form-control" id="first-name" name="first-name"
+                value="{{customer.first_name}}">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="last-name" class="sr-only">Last name</label>
+              <input class="form-control" id="last-name" name="last-name"
+                value="{{customer.last_name}}">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group input-group">
+              <label for="username" class="sr-only">Username</label>
+              <span class="input-group-addon">@</span>
+              <input class="form-control" id="username" name="username"
+                value="{{customer.username}}">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="sr-only">Email</label>
+          <input class="form-control" id="email" name="email"
+            value="{{customer.email}}">
+        </div>
+      </section>
+      <footer class="panel-footer">
+        <label for="joined" class="panel-footer">Joined</label> 
+          {{customer.created_at}}
+      </footer>
+    </article>
+    <article class="panel panel-default">
+      <header class="panel-heading"><h2>Shipping Address</h2></header>
+      <section class="panel-body">
+        <div class="form-group">
+          <label for="street-address" class="sr-only">Street Address</label>
+          <input class="form-control" id="street-address" name="street-address">
+        </div>
+        <div class="form-group">
+          <label for="street-address-extra" class="sr-only">
+            Street Address Extra
+          </label>
+          <input class="form-control" id="street-address-extra"
+            name="street-address-extra">
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="city" class="sr-only">City</label>
+              <input class="form-control" id="city" name="city">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="state" class="sr-only">State</label>
+              <input class="form-control" id="state" name="state">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="zip" class="sr-only">Zip</label>
+              <input class="form-control" id="zip" name="zip">
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+  </div>
+  <div class="col-md-6">
+    <article class="panel panel-default">
+      <header class="panel-heading"><h2 class="h4">Billing Info</h2></header>
+      <section class="panel-body">
+        <div class="row">
+          <div class="col-md-7">
+            <p class="h4">
+              ****-****-****-1234
+              <span class="label label-success">VISA</span>
+            </p>
+            <p>
+              <label>Expires:</label> 04/19
+            </p>
+          </div>
+          <div class="col-md-5 text-right">
+            <button class="btn btn-lg btn-default">View Details</button>
+          </div>
+        </div>
+        <h3>Billing Address <input type="checkbox">Same as shopping?</h3>
+        <div class="form-group">
+          <label for="street-address" class="sr-only">Street Address</label>
+          <input class="form-control" id="street-address" name="street-address">
+        </div>
+        <div class="form-group">
+          <label for="street-address-extra" class="sr-only">
+            Street Address Extra
+          </label>
+          <input class="form-control" id="street-address-extra"
+            name="street-address-extra">
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="city" class="sr-only">City</label>
+              <input class="form-control" id="city" name="city">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="state" class="sr-only">State</label>
+              <input class="form-control" id="state" name="state">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="zip" class="sr-only">Zip</label>
+              <input class="form-control" id="zip" name="zip">
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+  </div>
+</div>
+</form>
