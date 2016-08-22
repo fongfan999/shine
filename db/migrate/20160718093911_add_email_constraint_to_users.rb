@@ -13,7 +13,7 @@ class AddEmailConstraintToUsers < ActiveRecord::Migration
     execute %{
       ALTER TABLE
         users
-      ADD CONSTRAINT
+      DROP CONSTRAINT
         email_must_be_company_email
     }
   end
