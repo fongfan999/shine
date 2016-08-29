@@ -1,9 +1,10 @@
 <article class="customer-details">
   <h1>Customer {{customer.id}}</h1>
+  <h2>{{customer.created_at}}</h2>
 </article>
 
-<form>
 <div class="row">
+<form>
   <div class="col-md-6">
     <article class="panel panel-primary">
       <header class="panel-heading">
@@ -83,6 +84,7 @@
       </section>
     </article>
   </div>
+
   <div class="col-md-6">
     <article class="panel panel-default">
       <header class="panel-heading"><h2 class="h4">Billing Info</h2></header>
@@ -132,9 +134,9 @@
               <input class="form-control" id="zip" name="zip">
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </article>
   </div>
-</div>
 </form>
+</div>

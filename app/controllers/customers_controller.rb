@@ -26,9 +26,7 @@ class CustomersController < ApplicationController
   def show
     customer_detail = CustomerDetail.find(params[:id])
     respond_to do |format|
-      format.json d
-        render json: { customer_detail }
-      end
+      format.json { render json: customer_detail }
     end
   end
 end
