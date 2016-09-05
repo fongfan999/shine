@@ -16,14 +16,14 @@
             <div class="form-group">
               <label for="first-name" class="sr-only">First name</label>
               <input class="form-control" id="first-name" name="first-name"
-                value="{{customer.first_name}}">
+                ng-model="customer.first_name">
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-group">
               <label for="last-name" class="sr-only">Last name</label>
               <input class="form-control" id="last-name" name="last-name"
-                value="{{customer.last_name}}">
+                ng-model="customer.last_name">
             </div>
           </div>
           <div class="col-md-6">
@@ -31,7 +31,7 @@
               <label for="username" class="sr-only">Username</label>
               <span class="input-group-addon">@</span>
               <input class="form-control" id="username" name="username"
-                value="{{customer.username}}">
+                ng-model="customer.username">
             </div>
           </div>
         </div>
@@ -39,12 +39,12 @@
         <div class="form-group">
           <label for="email" class="sr-only">Email</label>
           <input class="form-control" id="email" name="email"
-            value="{{customer.email}}">
+            ng-model="customer.email">
         </div>
       </section>
       <footer class="panel-footer">
         <label for="joined" class="panel-footer">Joined</label> 
-          {{customer.created_at}}
+          {{customer.joined_at | date}}
       </footer>
     </article>
     <article class="panel panel-default">
@@ -52,32 +52,29 @@
       <section class="panel-body">
         <div class="form-group">
           <label for="street-address" class="sr-only">Street Address</label>
-          <input class="form-control" id="street-address" name="street-address">
-        </div>
-        <div class="form-group">
-          <label for="street-address-extra" class="sr-only">
-            Street Address Extra
-          </label>
-          <input class="form-control" id="street-address-extra"
-            name="street-address-extra">
+          <input class="form-control" id="street-address"
+            name="street-address" value="{{customer.shipping_street}}">
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label for="city" class="sr-only">City</label>
-              <input class="form-control" id="city" name="city">
+              <input class="form-control" id="city" name="city"
+               value="{{customer.shipping_city}}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="form-group">
               <label for="state" class="sr-only">State</label>
-              <input class="form-control" id="state" name="state">
+              <input class="form-control" id="state" name="state"
+                value="{{customer.shipping_state}}">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="zip" class="sr-only">Zip</label>
-              <input class="form-control" id="zip" name="zip">
+              <input class="form-control" id="zip" name="zip"
+                value="{{customer.shipping_zipcode}}">
             </div>
           </div>
         </div>
@@ -89,49 +86,62 @@
     <article class="panel panel-default">
       <header class="panel-heading"><h2 class="h4">Billing Info</h2></header>
       <section class="panel-body">
-        <div class="row">
-          <div class="col-md-7">
-            <p class="h4">
-              ****-****-****-1234
-              <span class="label label-success">VISA</span>
-            </p>
-            <p>
-              <label>Expires:</label> 04/19
-            </p>
+        <div class="row" ng-controller="CustomerCreditCardController"
+          ng-init="setCardholderId(customerId)">
+          <div ng-if="!creditCard.$resolved">
+            <div class="col-md-10 col-md-offset-1">
+              <aside class="progress">
+                <div class="progress-bar progress-bar-striped active"
+                  style="width: 100%">
+                  Loading...
+                </div>
+              </aside>
+            </div>
           </div>
-          <div class="col-md-5 text-right">
-            <button class="btn btn-lg btn-default">View Details</button>
+          <div ng-if="creditCard.$resolved">
+            <div class="col-md-7">
+              <p class="h4">
+                ****-****-****-{{creditCard.lastFour}}
+                <span class="label 
+                  label-success">{{creditCard.cardType}}</span>
+              </p>
+              <p>
+                <label>Expires:</label> 
+                {{creditCard.expirationMonth}}/{{creditCard.expirationYear}}
+              </p>
+            </div>
+            <div class="col-md-5 text-right">
+              <a href="{{creditCard.detailsLink}}"
+                class="btn btn-lg btn-default">View Details</a>
+            </div>
           </div>
         </div>
         <h3>Billing Address <input type="checkbox">Same as shopping?</h3>
         <div class="form-group">
           <label for="street-address" class="sr-only">Street Address</label>
-          <input class="form-control" id="street-address" name="street-address">
-        </div>
-        <div class="form-group">
-          <label for="street-address-extra" class="sr-only">
-            Street Address Extra
-          </label>
-          <input class="form-control" id="street-address-extra"
-            name="street-address-extra">
+          <input class="form-control" id="street-address"
+            name="street-address" value="{{customer.billing_street}}">
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label for="city" class="sr-only">City</label>
-              <input class="form-control" id="city" name="city">
+              <input class="form-control" id="city" name="city"
+                value="{{customer.billing_city}}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="form-group">
               <label for="state" class="sr-only">State</label>
-              <input class="form-control" id="state" name="state">
+              <input class="form-control" id="state" name="state"
+                value="{{customer.billing_state}}">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="zip" class="sr-only">Zip</label>
-              <input class="form-control" id="zip" name="zip">
+              <input class="form-control" id="zip" name="zip"
+                value="{{customer.billing_zipcode}}">
             </div>
           </div>
         </div>

@@ -1,0 +1,2 @@
+module FakeBillingHelper
+end
