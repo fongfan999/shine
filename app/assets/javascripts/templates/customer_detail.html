@@ -3,8 +3,8 @@
   <h2>{{customer.created_at}}</h2>
 </article>
 
+<form novalidate name="form">
 <div class="row">
-<form>
   <div class="col-md-6">
     <article class="panel panel-primary">
       <header class="panel-heading">
@@ -16,7 +16,7 @@
             <div class="form-group">
               <label for="first-name" class="sr-only">First name</label>
               <input class="form-control" id="first-name" name="first-name"
-                ng-model="customer.first_name">
+                ng-model="customer.first_name" required>
             </div>
           </div>
           <div class="col-md-3">
@@ -36,10 +36,17 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group has-feedback" ng-class="{
+          'has-error': form.email.$invalid && form.email.$dirty,
+          'has-success': form.email.$valid && form.email.$touched
+        }">
           <label for="email" class="sr-only">Email</label>
-          <input class="form-control" id="email" name="email"
-            ng-model="customer.email">
+          <input type="email" class="form-control" id="email" name="email"
+            ng-model="customer.email" required>
+          <p class="help-block" ng-messages="form.email.$error">
+            <span ng-message="required">Email is required</span>
+            <span ng-message="email">Email must look like an email</span>
+          </p>
         </div>
       </section>
       <footer class="panel-footer">
@@ -64,17 +71,37 @@
             </div>
           </div>
           <div class="col-md-2">
-            <div class="form-group">
-              <label for="state" class="sr-only">State</label>
-              <input class="form-control" id="state" name="state"
-                value="{{customer.shipping_state}}">
+            <div class="form-group"  ng-class="{
+              'has-error': form.shippingState.$invalid && form.shippingState.$dirty,
+              'has-success': form.shippingState.$valid && form.shippingState.$touched
+            }">
+              <label for="shippingState" class="sr-only">State</label>
+              <input class="form-control" id="shippingState"
+                name="shippingState" ng-model="customer.shipping_state"
+                required pattern="[A-Z][A-Z]">
+              <p class="help-block" ng-messages="form.shippingState.$error">
+                <span ng-message="required">State is required</span>
+                <span ng-message="pattern">
+                  State must be 2 uppercase letters
+                </span>
+              </p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="form-group">
-              <label for="zip" class="sr-only">Zip</label>
-              <input class="form-control" id="zip" name="zip"
-                value="{{customer.shipping_zipcode}}">
+            <div class="form-group"  ng-class="{
+              'has-error': form.shippingZip.$invalid && form.shippingZip.$dirty,
+              'has-success': form.shippingZip.$valid && form.shippingZip.$touched
+            }">
+              <label for="shippingZip" class="sr-only">Zip</label>
+              <input class="form-control" id="shippingZip" name="shippingZip"
+                ng-model="customer.shipping_zipcode" required
+                pattern="\d\d\d\d\d.*">
+              <p class="help-block" ng-messages="form.shippingZip.$error">
+                <span ng-message="required">Zip is required</span>
+                <span ng-message="pattern">
+                  Zip must be five degits at beginning
+                </span>
+              </p>
             </div>
           </div>
         </div>
@@ -116,7 +143,7 @@
             </div>
           </div>
         </div>
-        <h3>Billing Address <input type="checkbox">Same as shopping?</h3>
+        <h3>Billing Address <input type="checkbox">Same as shipping?</h3>
         <div class="form-group">
           <label for="street-address" class="sr-only">Street Address</label>
           <input class="form-control" id="street-address"
@@ -147,6 +174,14 @@
         </div>
       </section>
     </article>
+
+    <div class="text-right">
+      <button ng-click="save()" class="btn btn-lg btn-primary"
+        ng-disabled="form.$invalid || form.$pristine">
+        Save Changes
+      </button>
+    </div>
   </div>
-</form>
 </div>
+
+</form>
